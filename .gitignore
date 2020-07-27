@@ -105,3 +105,4 @@ dist
 
 # Sqlite3 databases
 .sqlite3
+backend/src/settings.sqlite3
