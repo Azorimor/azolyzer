@@ -9,7 +9,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  test-backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +26,24 @@ jobs:
       working-directory: ./backend
       run: |
         npm run test
+  test-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setting up Node js
+      uses: actions/setup-node@v2.1.1
+      with:
+        node-version: 14.x
+    - name: Installing Dependencies
+      working-directory: ./angular-frontend
+      run: |
+        npm ci
+    - name: Frontend Testing
+      working-directory: ./angular-frontend
+      run: |
+        npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+    - name: E2E Testing
+      working-directory: ./angular-frontend
+      run: |
+        npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
