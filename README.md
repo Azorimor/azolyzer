@@ -5,6 +5,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/Azorimor/discordbot/badge.svg?targetFile=angular-frontend/package.json)](https://snyk.io/test/github/Azorimor/discordbot?targetFile=angular-frontend/package.json)
 [![Known Vulnerabilities](https://snyk.io/test/github/Azorimor/discordbot/badge.svg?targetFile=backend/package.json)](https://snyk.io/test/github/Azorimor/discordbot?targetFile=backend/package.json)
 ![Node.js CI](https://github.com/Azorimor/discordbot/workflows/Node.js%20CI/badge.svg?branch=master)
+
 Discordbot to moderate discord servers.
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAzorimor%2Fdiscordbot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAzorimor%2Fdiscordbot?ref=badge_large)
