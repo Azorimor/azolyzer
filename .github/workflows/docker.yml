@@ -1,0 +1,50 @@
+# This workflow will do a clean install of node dependencies and unit test the backend application.
+
+name: Docker Builds
+
+on:
+  push:
+    branches-ignore: 
+      - '**'
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setting up Node js
+      uses: actions/setup-node@v2.1.1
+      with:
+        node-version: 14.x
+    - name: Installing Dependencies
+      working-directory: ./backend
+      run: |
+        npm ci
+    - name: Building the Typescript to Javascript
+      working-directory: ./backend
+      run: |
+        npm run tsc
+    - name: Build Docker Image
+      uses: flownative/action-docker-build@master
+      with:
+        tag_ref: ${{ github.ref }}
+        image_name: azorimor/discordbot/backend
+        registry_password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish release to docker.io
+      uses: flownative/action-docker-publish-semver@master
+      with:
+        tag_ref: ${{ github.ref }}
+        tag_latest: 'yes'
+
+        source_image_name: docker.pkg.github.com/azorimor/discordbot/backend
+        source_registry_username: github
+        source_registry_password: ${{ secrets.GITHUB_TOKEN }}
+        source_registry_endpoint: https://docker.pkg.github.com/v2/
+
+        target_image_name: azorimor/discordbot
+        target_registry_username: ${{ secrets.DOCKER_IO_REGISTRY_USER }}
+        target_registry_password: ${{ secrets.DOCKER_IO_REGISTRY_PASSWORD }}
+        target_registry_endpoint: https://index.docker.io/v1/
