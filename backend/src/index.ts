@@ -13,7 +13,12 @@ createConnection().then((connection) => {
         });
     });
     // starting the bot
-    client.login(config.token);
+    client.login(config.token).catch(error => {
+        logger.log({
+            level: "error",
+            message: "Client failed to login. Maybe the given token is invalid."
+        })
+    });
 }).catch((error) => {
     logger.log({
         level: "error",
