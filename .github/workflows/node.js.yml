@@ -22,7 +22,7 @@ jobs:
       working-directory: ./backend
       run: |
         npm ci
-    - name: Backend Testing
+    - name: Backend Jest Testing
       working-directory: ./backend
       run: |
         npm run test
@@ -39,7 +39,7 @@ jobs:
       working-directory: ./angular-frontend
       run: |
         npm ci
-    - name: Frontend Testing
+    - name: Angular Karma Testing
       working-directory: ./angular-frontend
       run: |
         npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
