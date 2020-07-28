@@ -4,6 +4,7 @@ const sqlite = require("sqlite");
 import sqlite3 from "sqlite3";
 import config from "./config";
 import path from "path";
+import logger from "./logger";
 
 /**
  * The main App file.
@@ -47,11 +48,17 @@ class Bot {
         }).then((db : sqlite3.Database) =>
             new Commando.SQLiteProvider(db)
         )).catch(error => {
-            console.log(error);
+            logger.log({
+                level: "error",
+                message: error,
+            });
         })
 
         this.client.once("ready", ()=> {
-            console.log("Logged in as "+ this.client!.user!.tag+"!");
+            logger.log({
+                level: "info",
+                message: `Logged in as ${this.client!.user!.tag}!`,
+            });
         });
     }
 }

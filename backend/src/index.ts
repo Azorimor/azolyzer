@@ -1,15 +1,22 @@
 import app from "./app";
 import client from "./bot"
 import config from "./config";
+import logger from "./logger";
 import {createConnection} from "typeorm";
 
-createConnection().then(() => {
+createConnection().then((connection) => {
     // starting express
     app.listen(config.port, () => {
-        console.log("App is listening on port "+ config.port);
+        logger.log({
+            level: "info",
+            message: `App is listening on port ${config.port}`,
+        });
     });
     // starting the bot
     client.login(config.token);
 }).catch((error) => {
-    console.log(error);
+    logger.log({
+        level: "error",
+        message: error,
+    });
 })
