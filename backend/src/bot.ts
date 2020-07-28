@@ -1,6 +1,5 @@
 import Commando from "discord.js-commando";
-// import sqlite from "sqlite"; //FIXME temporary later postgres will be used.
-const sqlite = require("sqlite");
+import * as sqlite from "sqlite";
 import sqlite3 from "sqlite3";
 import config from "./config";
 import path from "path";
@@ -45,7 +44,7 @@ class Bot {
         this.client.setProvider(sqlite.open({
             filename: path.join(__dirname,"settings.sqlite3"),
             driver: sqlite3.Database
-        }).then((db : sqlite3.Database) =>
+        }).then((db : sqlite.Database) =>
             new Commando.SQLiteProvider(db)
         )).catch(error => {
             logger.log({
