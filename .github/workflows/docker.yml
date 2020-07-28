@@ -28,10 +28,11 @@ jobs:
       run: |
         npm run tsc
     - name: Build Docker Image
-      uses: flownative/action-docker-build@master
+      uses: mr-smithers-excellent/docker-build-push@v4
       with:
-        tag_ref: ${{ github.ref }}
-        image_name: azorimor/discordbot/backend
+        image: azorimor/discordbot/backend
+        registry: docker.pkg.github.com
+        username: ${{ github.actor }}
         registry_password: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish release to docker.io
       uses: flownative/action-docker-publish-semver@master
