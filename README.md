@@ -4,6 +4,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4b9ef67d00ff4cd186f263b6d80abfa3)](https://www.codacy.com/manual/Azorimor/discordbot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Azorimor/discordbot&amp;utm_campaign=Badge_Grade)
 [![Known Vulnerabilities](https://snyk.io/test/github/Azorimor/discordbot/badge.svg?targetFile=angular-frontend/package.json)](https://snyk.io/test/github/Azorimor/discordbot?targetFile=angular-frontend/package.json)
 [![Known Vulnerabilities](https://snyk.io/test/github/Azorimor/discordbot/badge.svg?targetFile=backend/package.json)](https://snyk.io/test/github/Azorimor/discordbot?targetFile=backend/package.json)
+![Node.js CI](https://github.com/Azorimor/discordbot/workflows/Node.js%20CI/badge.svg?branch=master)
 
 Discordbot to moderate discord servers.
 ## License
