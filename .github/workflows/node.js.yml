@@ -28,6 +28,10 @@ jobs:
       working-directory: ./backend
       run: |
         npm ci
+    - name: Eslint
+      working-directory: ./backend
+      run: |
+        npm run lint
     - name: Backend Jest Testing
       working-directory: ./backend
       run: |
