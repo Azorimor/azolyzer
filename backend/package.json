@@ -43,11 +43,52 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.19.0",
     "eslint-plugin-no-loops": "^0.3.0",
+    "husky": "^4.2.5",
     "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
     "ts-jest": "^26.1.4",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "./node_modules/.bin/eslint --fix",
+      "git add"
+    ]
+  },  
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "ts-jest",
+    "coveragePathIgnorePatterns": [
+      "./node_modules/",
+      "./dist/",
+      "./lib/"
+    ],
+    "modulePathIgnorePatterns": [
+      "./dist/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "setupFiles": [
+      "./test/setup.ts"
+    ]
   },
   "nodemonConfig": {
     "ignore": [
