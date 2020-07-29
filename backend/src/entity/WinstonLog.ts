@@ -1,34 +1,38 @@
-import {Entity, PrimaryColumn, Column, PrimaryGeneratedColumn} from "typeorm";
+import {
+  Entity, Column, PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
+/**
+ * This Entity is used for log entries sent by winston.
+ */
 export class WinstonLog {
-
-    @PrimaryGeneratedColumn("rowid")
+    @PrimaryGeneratedColumn('rowid')
     _id!: number
 
     @Column({
-        type: "timestamp"
+      type: 'timestamp',
     })
     timestamp!: Date
 
     @Column({
-        type: "character varying"
+      type: 'character varying',
     })
     level!: string
 
     @Column({
-        type: "character varying"
+      type: 'character varying',
     })
     message!: string
 
     @Column({
-        type: "json",
-        nullable: true,
+      type: 'json',
+      nullable: true,
     })
     meta!: JSON
 
     @Column({
-        type: "character varying",
+      type: 'character varying',
     })
     service!: string
 }

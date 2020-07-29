@@ -1,27 +1,30 @@
-import app from "./app";
-import client from "./bot"
-import config from "./config";
-import logger from "./logger";
-import {createConnection} from "typeorm";
+import app from './app';
+import client from './bot';
+import config from './config';
+import logger from './logger';
+import {
+  createConnection,
+} from 'typeorm';
 
-createConnection().then((connection) => {
-    // starting express
-    app.listen(config.port, () => {
-        logger.log({
-            level: "info",
-            message: `App is listening on port ${config.port}`,
-        });
-    });
-    // starting the bot
-    client.login(config.token).catch(error => {
-        logger.log({
-            level: "error",
-            message: "Client failed to login. Maybe the given token is invalid."
-        })
-    });
-}).catch((error) => {
+createConnection().then(() => {
+  // starting express
+  app.listen(config.port, () => {
     logger.log({
-        level: "error",
-        message: error,
+      level: 'info',
+      message: `App is listening on port ${config.port}`,
     });
-})
+  });
+  // starting the bot
+  client.login(config.token).catch((error) => {
+    logger.log({
+      level: 'error',
+      message: `Client failed to login. Maybe
+      the given token is invalid. Error: ${error}`,
+    });
+  });
+}).catch((error) => {
+  logger.log({
+    level: 'error',
+    message: error,
+  });
+});

@@ -6,10 +6,14 @@
  * @author Jeffrey Yang <jeffrey.a.yang@gmail.com>
  */
 
-import {getRepository, Repository, getConnection} from "typeorm";
-import Transport from "winston-transport";
-import { WinstonLog } from "../entity/WinstonLog";
-import moment from "moment";
+import {
+  getRepository,
+} from 'typeorm';
+import Transport from 'winston-transport';
+import {
+  WinstonLog,
+} from '../entity/WinstonLog';
+import moment from 'moment';
 
 /**
  * Class for the Postgres transport object.
@@ -19,18 +23,16 @@ import moment from "moment";
  * should log.
  * @param {Boolean} [options.silent=false] - Boolean flag indicating whether to
  * suppress output.
- * @param {String} options.conString - Postgres connection uri
- * @param {String} [options.tableName='winston_logs'] - The name of the table you
- * want to store log messages in.
- * @param {Array} [options.tableFields=['level', 'msg', 'meta']] - array of the table fields
  * @param {String} [options.label] - Label stored with entry object if defined.
  * @param {String} [options.name] - Transport instance identifier. Useful if you
  * need to create multiple Postgres transports.
  */
 export class PostgresTransport extends Transport {
-
   private name: string;
-
+  /**
+   * Create a new Transport.
+   * @param {object} options The options for the logger.
+   */
   constructor(options : any) {
     super(options);
     //
@@ -47,14 +49,14 @@ export class PostgresTransport extends Transport {
 
   /**
    * Core logging method exposed to Winston. Metadata is optional.
-   * @param {string} level Level at which to log the message.
-   * @param {string} message Message to log
-   * @param {Object=} meta Metadata to log
+   * @param {any} info Level at which to log the message. See
+   * [info.message, info.level, info.meta]
    * @param {Function} callback Continuation to respond to when complete.
+   * @return {any} If this logger is silent, null gets returned.
    */
-  log(info : any, callback: () => void) {
+  log(info : any, callback: () => void):any {
     setImmediate(() => {
-      this.emit("logged",info);
+      this.emit('logged', info);
     });
 
     if (this.silent) {
@@ -63,11 +65,11 @@ export class PostgresTransport extends Transport {
     }
     const logRepository = getRepository(WinstonLog);
     const logEntry = logRepository.create({
-      timestamp : moment().utc().format(),
+      timestamp: moment().utc().format(),
       level: info.level,
       message: info.message,
       meta: info.meta,
-      service: info.service
+      service: info.service,
     });
     logRepository.save(logEntry);
     callback();

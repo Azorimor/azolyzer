@@ -1,7 +1,8 @@
-import express, {Application} from 'express';
-import cors from "cors";
+import express, {
+  Application,
+} from 'express';
+import cors from 'cors';
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
 
 /**
  * The main App file.
