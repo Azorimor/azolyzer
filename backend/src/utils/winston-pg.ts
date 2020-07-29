@@ -1,11 +1,3 @@
-/**
- * @module 'winston-pg-native'
- * @fileoverview Winston transport for logging into PostgreSQL
- * @license MIT
- * @author Andrei Tretyakov <andrei.tretyakov@gmail.com>
- * @author Jeffrey Yang <jeffrey.a.yang@gmail.com>
- */
-
 import {
   getRepository,
 } from 'typeorm';
