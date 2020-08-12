@@ -5,12 +5,12 @@ name: Node.js CI
 on:
   push:
     branches: [ master ]
-    paths-ignore: 
+    paths-ignore:
       - 'README.md'
       - 'LICENSE'
   pull_request:
     branches: [ master ]
-    paths-ignore: 
+    paths-ignore:
       - 'README.md'
       - 'LICENSE'
 
@@ -38,7 +38,7 @@ jobs:
         npm run test
   test-frontend:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
     - name: Setting up Node js
