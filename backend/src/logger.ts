@@ -1,7 +1,7 @@
 import winston from 'winston';
 import {
   PostgresTransport,
-} from './utils/winston-pg';
+} from './utils/winston-typeorm';
 
 const logger = winston.createLogger({
   level: 'info',
