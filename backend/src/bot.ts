@@ -1,20 +1,17 @@
-import Commando from 'discord.js-commando';
-import * as sqlite from 'sqlite';
-import sqlite3 from 'sqlite3';
+import Discord from 'discord.js';
 import config from './config';
-import path from 'path';
 import logger from './logger';
 
 /**
  * The main App file.
  */
 class Bot {
-    public client: Commando.CommandoClient;
+    public client: Discord.Client;
     /**
      * Create a new App with the default configured express settings.
      */
     constructor() {
-      this.client = new Commando.CommandoClient({ // TODO set owner
+      this.client = new Discord.Client({ // TODO set owner
         presence: {
           status: 'online',
           activity: {
@@ -23,7 +20,6 @@ class Bot {
             url: config.activity_URL,
           },
         },
-        // owner: config.bot_owner
       });
       this.config();
     }
@@ -32,27 +28,6 @@ class Bot {
      * Configure the client field.
      */
     private config(): void {
-      this.client.registry.registerDefaultTypes()
-          .registerGroups([
-            ['fun', 'Fun commands'],
-            ['moderation', 'Moderation commands'],
-          ])
-          .registerDefaultGroups()
-          .registerDefaultCommands()
-          .registerCommandsIn(path.join(__dirname, 'commands'));
-
-      this.client.setProvider(sqlite.open({
-        filename: path.join(__dirname, 'settings.sqlite3'),
-        driver: sqlite3.Database,
-      }).then((db : sqlite.Database) =>
-        new Commando.SQLiteProvider(db)
-      )).catch((error) => {
-        logger.log({
-          level: 'error',
-          message: error,
-        });
-      });
-
       this.client.once('ready', ()=> {
         logger.log({
           level: 'info',

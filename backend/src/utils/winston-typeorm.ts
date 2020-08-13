@@ -4,7 +4,7 @@ import {
 import Transport from 'winston-transport';
 import {
   WinstonLog,
-} from '../entity/WinstonLog';
+} from '../entity/winstonLog';
 import moment from 'moment';
 
 /**
