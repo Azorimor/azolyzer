@@ -6,7 +6,7 @@ import {
   createConnection,
 } from 'typeorm';
 
-createConnection().then(() => {
+createConnection().then((connection) => {
   // starting express
   app.listen(config.port, () => {
     logger.log({
@@ -23,6 +23,8 @@ createConnection().then(() => {
     });
   });
 }).catch((error) => {
+  // FIXME The logger might not be working at this point. Need to specify different one
+  console.log(error);
   logger.log({
     level: 'error',
     message: error,

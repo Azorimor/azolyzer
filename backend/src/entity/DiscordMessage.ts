@@ -14,7 +14,7 @@ export class DiscordMessage {
   id!: number;
 
   @ManyToOne((type) => DiscordUser, (user: DiscordUser) => user.messages)
-  author!: number;
+  author!: DiscordUser;
 
   @Column()
   channel!: number;

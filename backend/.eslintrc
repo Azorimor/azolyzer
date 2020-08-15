@@ -29,6 +29,7 @@
           "ImportDeclaration": "always", 
           "ExportDeclaration": "never" 
         }
-      ]
+      ],
+      "linebreak-style": "off"
     }
 }

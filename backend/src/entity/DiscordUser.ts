@@ -1,5 +1,5 @@
 import {
-  Entity, PrimaryColumn, Column, OneToMany,
+  Entity, PrimaryGeneratedColumn, Column, OneToMany,
 } from 'typeorm';
 import {
   DiscordMessage,
@@ -10,8 +10,11 @@ import {
  * Entity for an Discord User.
  */
 export class DiscordUser {
-  @PrimaryColumn()
-  id!: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
+
+  @Column()
+  discordid!: number;
 
   @Column()
   avatarURL!: string;

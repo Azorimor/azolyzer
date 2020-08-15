@@ -55,7 +55,6 @@ export class TypeormTransport extends Transport {
       callback();
       return null;
     }
-    console.log(getConnection());
     const logRepository = getRepository(WinstonLog);
     const logEntry = logRepository.create({
       timestamp: moment().utc().format(),
