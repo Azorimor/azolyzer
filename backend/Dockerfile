@@ -10,12 +10,6 @@ ENV NODE_ENV=production
 # where available (npm@5+)
 COPY package*.json ./
 
-# Install git (currently used for discordjs.commando, because their npm site is 2 years behind github master).
-# Maybe change to multi staged build.
-RUN apk add --no-cache git
-# RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 RUN npm ci --only=production
 
 # Change user for security

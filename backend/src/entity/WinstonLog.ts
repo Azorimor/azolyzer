@@ -8,31 +8,31 @@ import {
  */
 export class WinstonLog {
     @PrimaryGeneratedColumn('rowid')
-    _id!: number
+    id!: number;
 
     @Column({
-      type: 'timestamp',
+      type: 'timestamptz',
     })
-    timestamp!: Date
-
-    @Column({
-      type: 'character varying',
-    })
-    level!: string
+    timestamp!: Date;
 
     @Column({
       type: 'character varying',
     })
-    message!: string
+    level!: string;
+
+    @Column({
+      type: 'character varying',
+    })
+    message!: string;
 
     @Column({
       type: 'json',
       nullable: true,
     })
-    meta!: JSON
+    meta!: JSON;
 
     @Column({
       type: 'character varying',
     })
-    service!: string
+    service!: string;
 }

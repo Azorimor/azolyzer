@@ -1,6 +1,6 @@
 import winston from 'winston';
 import {
-  PostgresTransport,
+  TypeormTransport,
 } from './utils/winston-typeorm';
 
 const logger = winston.createLogger({
@@ -17,7 +17,7 @@ const logger = winston.createLogger({
     new winston.transports.File({
       filename: 'combinded.log',
     }),
-    new PostgresTransport({
+    new TypeormTransport({
       name: 'TypeOrm-Postgres',
       level: 'info',
       silent: false,

@@ -1,10 +1,10 @@
 import {
-  getRepository,
+  getRepository, getConnection,
 } from 'typeorm';
 import Transport from 'winston-transport';
 import {
   WinstonLog,
-} from '../entity/winstonLog';
+} from '../entity/WinstonLog';
 import moment from 'moment';
 
 /**
@@ -19,7 +19,7 @@ import moment from 'moment';
  * @param {String} [options.name] - Transport instance identifier. Useful if you
  * need to create multiple Postgres transports.
  */
-export class PostgresTransport extends Transport {
+export class TypeormTransport extends Transport {
   private name: string;
   /**
    * Create a new Transport.
@@ -55,6 +55,7 @@ export class PostgresTransport extends Transport {
       callback();
       return null;
     }
+    console.log(getConnection());
     const logRepository = getRepository(WinstonLog);
     const logEntry = logRepository.create({
       timestamp: moment().utc().format(),
