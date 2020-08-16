@@ -7,7 +7,7 @@ import {
 } from 'discord.js';
 import config from '../config';
 import {
-  getRepository, Repository,
+  getRepository,
 } from 'typeorm';
 import {
   DiscordMessage,
@@ -15,6 +15,9 @@ import {
 import {
   DiscordUser,
 } from '../entity/DiscordUser';
+import {
+  TextChannel,
+} from '../entity/TextChannel';
 
 /**
  * This Event is called, if a user writes a message. Discord: message
@@ -40,6 +43,7 @@ export class DiscordMessageEvent extends DiscordEvent {
     logger.info(`Message event called successfully - ${message}`);
     const userRepo = getRepository(DiscordUser);
     const messageRepo = getRepository(DiscordMessage);
+    const channelRepo = getRepository(TextChannel);
     // This message is a command
     if (message.content.startsWith(config.prefix)) {
       logger.info(`Command issued: ${message.content}`);
@@ -48,20 +52,30 @@ export class DiscordMessageEvent extends DiscordEvent {
       if (typeof user === 'undefined') {
         const author = new DiscordUser();
         author.id = message.author.id;
-        author.avatarURL = 'URL'; // FIXME get the url
-        author.createdAt = message.author.createdAt;
+        let avatarURL = message.author.avatarURL();
+        if (avatarURL === null) {
+          avatarURL = message.author.defaultAvatarURL;
+        }
+        author.avatarURL = avatarURL; // FIXME get the url
+        author.accountCreatedAt = message.author.createdAt;
         author.locale = message.author.locale;
         author.username = message.author.username;
         author.tag = message.author.tag;
         userRepo.save(author);
         user = author;
       }
+      let channel = await channelRepo.findOne({id: message.channel.id});
+      if (typeof channel === 'undefined') {
+        const textChannel = new TextChannel();
+        textChannel.id = message.channel.id;
+        channelRepo.save(textChannel);
+        channel = textChannel;
+      }
       const msg = new DiscordMessage();
       msg.id = message.id;
       msg.author = user;
-      msg.channel = message.channel.id;
-      msg.guild = 'TODO';
-      msg.member = 'TODO';
+      msg.channel = channel;
+      msg.messageCreatedAt = message.createdAt;
       messageRepo.save(msg);
     }
   }

@@ -1,5 +1,5 @@
 import {
-  Entity, Column, OneToMany, PrimaryColumn,
+  Entity, Column, OneToMany, PrimaryColumn, CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 import {
   DiscordMessage,
@@ -10,25 +10,23 @@ import {
  * Entity for an Discord User.
  */
 export class DiscordUser {
-  @PrimaryColumn()
+  @PrimaryColumn({
+    type: 'bigint',
+  })
   id!: string;
-
-  // @Column()
-  // discordid!: number;
 
   @Column()
   avatarURL!: string;
 
-  @Column()
-  createdAt!: Date;
+  @Column({
+    type: 'timestamptz',
+  })
+  accountCreatedAt!: Date;
 
   @Column({
     nullable: true,
   })
   locale!: string;
-
-  // @Column() can be status, playing, ...
-  // presence!: string;
 
   @Column()
   username!: string;
@@ -38,4 +36,14 @@ export class DiscordUser {
 
   @OneToMany((type) => DiscordMessage, (message: DiscordMessage) => message.author)
   messages!: DiscordMessage[];
+
+  @CreateDateColumn({
+    type: 'timestamptz',
+  })
+  createdAt!: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamptz',
+  })
+  updatedAt!: Date;
 }

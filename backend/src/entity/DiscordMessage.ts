@@ -1,9 +1,12 @@
 import {
-  Entity, Column, PrimaryColumn, ManyToOne,
+  Entity, Column, PrimaryColumn, ManyToOne, CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 import {
   DiscordUser,
 } from './DiscordUser';
+import {
+  TextChannel,
+} from './TextChannel';
 
 @Entity()
 /**
@@ -16,12 +19,30 @@ export class DiscordMessage {
   @ManyToOne((type) => DiscordUser, (user: DiscordUser) => user.messages)
   author!: DiscordUser;
 
-  @Column()
-  channel!: string;
+  @ManyToOne((type) => TextChannel, (channel: TextChannel) => channel.messages)
+  channel!: TextChannel;
 
-  @Column()
-  guild!: string;
+  // Redundant information. Gets saved in Channel Entity for DMChannel, GuildChannel, ...
+  // @Column({
+  //   nullable: true,
+  // })
+  // guild!: string;
 
-  @Column()
-  member!: string;
+  // @Column()
+  // member!: string;
+
+  @Column({
+    type: 'timestamptz',
+  })
+  messageCreatedAt!: Date;
+
+  @CreateDateColumn({
+    type: 'timestamptz',
+  })
+  createdAt!: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamptz',
+  })
+  updatedAt!: Date;
 }
