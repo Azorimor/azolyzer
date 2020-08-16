@@ -17,11 +17,11 @@ const logger = winston.createLogger({
     new winston.transports.File({
       filename: 'combinded.log',
     }),
-    new TypeormTransport({
-      name: 'TypeOrm-Postgres',
-      level: 'info',
-      silent: false,
-    }),
+    // new TypeormTransport({
+    //   name: 'TypeOrm-Postgres',
+    //   level: 'info',
+    //   silent: false,
+    // }),
   ],
 });
 
@@ -29,6 +29,23 @@ if (process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({
     format: winston.format.simple(),
   }));
+} else {
+  logger.add(
+      new TypeormTransport({
+        name: 'TypeOrm-Postgres',
+        level: 'info',
+        silent: false,
+      }),
+  );
 }
+
+// if (process.env.NODE_ENV !== 'development') {
+//   logger.add(
+//       new TypeormTransport({
+//         name: 'TypeOrm-Postgres',
+//         level: 'info',
+//         silent: false,
+//       }));
+// }
 
 export default logger;
