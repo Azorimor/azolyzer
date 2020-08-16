@@ -11,17 +11,17 @@ import {
  */
 export class DiscordMessage {
   @PrimaryColumn()
-  id!: number;
+  id!: string;
 
   @ManyToOne((type) => DiscordUser, (user: DiscordUser) => user.messages)
   author!: DiscordUser;
 
   @Column()
-  channel!: number;
+  channel!: string;
 
   @Column()
-  guild!: number;
+  guild!: string;
 
   @Column()
-  member!: number;
+  member!: string;
 }

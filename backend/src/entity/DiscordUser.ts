@@ -11,10 +11,10 @@ import {
  */
 export class DiscordUser {
   @PrimaryColumn()
-  id!: number;
+  id!: string;
 
-  @Column()
-  discordid!: number;
+  // @Column()
+  // discordid!: number;
 
   @Column()
   avatarURL!: string;
@@ -22,11 +22,13 @@ export class DiscordUser {
   @Column()
   createdAt!: Date;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   locale!: string;
 
-  @Column()
-  presence!: string;
+  // @Column() can be status, playing, ...
+  // presence!: string;
 
   @Column()
   username!: string;

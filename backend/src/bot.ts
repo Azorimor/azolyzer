@@ -1,11 +1,12 @@
 import Discord from 'discord.js';
 import config from './config';
 import logger from './logger';
+import DiscordMessageEvent from './event/message';
 
 /**
  * The main App file.
  */
-class Bot {
+export class Bot {
     public client: Discord.Client;
     /**
      * Create a new App with the default configured express settings.
@@ -21,20 +22,20 @@ class Bot {
           },
         },
       });
-      this.config();
     }
 
     /**
      * Configure the client field.
      */
-    private config(): void {
+    public config(): void {
       this.client.once('ready', ()=> {
         logger.log({
           level: 'info',
           message: `Logged in as ${this.client?.user?.tag}!`,
         });
       });
+      this.client.on('message', (message) => DiscordMessageEvent.execute(message));
     }
 }
 
-export default new Bot().client;
+// export default new Bot().client;
