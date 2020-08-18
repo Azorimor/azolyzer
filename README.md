@@ -6,7 +6,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/Azorimor/discordbot/badge.svg?targetFile=backend/package.json)](https://snyk.io/test/github/Azorimor/discordbot?targetFile=backend/package.json)
 ![Node.js CI](https://github.com/Azorimor/discordbot/workflows/Node.js%20CI/badge.svg?branch=master)
 ----------
-Discordbot to moderate discord servers.
+Discordbot to save statistics for discord servers.
 # Documentation
 The documentation of this project will be available [here](https://azorimor.github.io/discordbot-docs/). You can contribute to the documentation [here](https://github.com/Azorimor/discordbot-docs).
 ## License
