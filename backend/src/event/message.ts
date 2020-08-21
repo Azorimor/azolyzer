@@ -6,18 +6,6 @@ import {
   Message,
 } from 'discord.js';
 import config from '../config';
-import {
-  getRepository,
-} from 'typeorm';
-import {
-  DiscordMessage,
-} from '../entity/DiscordMessage';
-import {
-  DiscordUser,
-} from '../entity/DiscordUser';
-import {
-  TextChannel,
-} from '../entity/TextChannel';
 
 /**
  * This Event is called, if a user writes a message. Discord: message
@@ -40,43 +28,47 @@ export class DiscordMessageEvent extends DiscordEvent {
    * @param {Message} message The issued message, which called this event.
    */
   public async execute(message: Message):Promise<void> {
-    logger.info(`Message event called successfully - ${message}`);
-    const userRepo = getRepository(DiscordUser);
-    const messageRepo = getRepository(DiscordMessage);
-    const channelRepo = getRepository(TextChannel);
+    // TODO log bot messages
+    if (message.author.bot) {
+      return;
+    }
+    // const userRepo = getRepository(DiscordUser);
+    // const messageRepo = getRepository(DiscordMessage);
+    // const channelRepo = getRepository(TextChannel);
     // This message is a command
     if (message.content.startsWith(config.prefix)) {
       logger.info(`Command issued: ${message.content}`);
     } else {
-      let user = await userRepo.findOne({id: message.author.id});
-      if (typeof user === 'undefined') {
-        const author = new DiscordUser();
-        author.id = message.author.id;
-        let avatarURL = message.author.avatarURL();
-        if (avatarURL === null) {
-          avatarURL = message.author.defaultAvatarURL;
-        }
-        author.avatarURL = avatarURL; // FIXME get the url
-        author.accountCreatedAt = message.author.createdAt;
-        author.locale = message.author.locale;
-        author.username = message.author.username;
-        author.tag = message.author.tag;
-        userRepo.save(author);
-        user = author;
-      }
-      let channel = await channelRepo.findOne({id: message.channel.id});
-      if (typeof channel === 'undefined') {
-        const textChannel = new TextChannel();
-        textChannel.id = message.channel.id;
-        channelRepo.save(textChannel);
-        channel = textChannel;
-      }
-      const msg = new DiscordMessage();
-      msg.id = message.id;
-      msg.author = user;
-      msg.channel = channel;
-      msg.messageCreatedAt = message.createdAt;
-      messageRepo.save(msg);
+      // let user = await userRepo.findOne({id: message.author.id});
+      // if (typeof user === 'undefined') {
+      //   const author = new DiscordUser();
+      //   author.id = message.author.id;
+      //   // FIXME If Server message (new User) id is wrong and causes problems
+      //   let avatarURL = message.author.avatarURL();
+      //   if (avatarURL === null) {
+      //     avatarURL = message.author.defaultAvatarURL;
+      //   }
+      //   author.avatarURL = avatarURL; // FIXME get the url
+      //   author.accountCreatedAt = message.author.createdAt;
+      //   author.locale = message.author.locale;
+      //   author.username = message.author.username;
+      //   author.tag = message.author.tag;
+      //   userRepo.save(author);
+      //   user = author;
+      // }
+      // let channel = await channelRepo.findOne({id: message.channel.id});
+      // if (typeof channel === 'undefined') {
+      //   const textChannel = new TextChannel();
+      //   textChannel.id = message.channel.id;
+      //   channelRepo.save(textChannel);
+      //   channel = textChannel;
+      // }
+      // const msg = new DiscordMessage();
+      // msg.id = message.id;
+      // msg.author = user;
+      // msg.channel = channel;
+      // msg.messageCreatedAt = message.createdAt;
+      // messageRepo.save(msg);
     }
   }
 }

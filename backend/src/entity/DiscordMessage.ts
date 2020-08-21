@@ -2,11 +2,11 @@ import {
   Entity, Column, PrimaryColumn, ManyToOne, CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 import {
-  DiscordUser,
-} from './DiscordUser';
-import {
   TextChannel,
 } from './TextChannel';
+import {
+  GuildMember,
+} from './GuildMember';
 
 @Entity()
 /**
@@ -16,8 +16,8 @@ export class DiscordMessage {
   @PrimaryColumn()
   id!: string;
 
-  @ManyToOne((type) => DiscordUser, (user: DiscordUser) => user.messages)
-  author!: DiscordUser;
+  @ManyToOne((type) => GuildMember, (member: GuildMember) => member.messages)
+  author!: GuildMember;
 
   @ManyToOne((type) => TextChannel, (channel: TextChannel) => channel.messages)
   channel!: TextChannel;

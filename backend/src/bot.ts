@@ -2,6 +2,7 @@ import Discord from 'discord.js';
 import config from './config';
 import logger from './logger';
 import DiscordMessageEvent from './event/message';
+import DiscordGuildCreateEvent from './event/guildCreate';
 
 /**
  * The main App file.
@@ -22,6 +23,7 @@ export class Bot {
           },
         },
       });
+      this.config();
     }
 
     /**
@@ -35,7 +37,6 @@ export class Bot {
         });
       });
       this.client.on('message', (message) => DiscordMessageEvent.execute(message));
+      this.client.on('guildCreate', (guild) => DiscordGuildCreateEvent.execute(guild));
     }
 }
-
-// export default new Bot().client;

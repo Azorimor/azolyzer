@@ -18,7 +18,6 @@ createConnection().then(() => {
   });
   // starting the bot
   const bot = new Bot();
-  bot.config();
   const client = bot.client;
   client.login(config.token).catch((error) => {
     logger.log({

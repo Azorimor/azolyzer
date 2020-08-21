@@ -2,8 +2,11 @@ import {
   Entity, Column, OneToMany, PrimaryColumn, CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 import {
-  DiscordMessage,
-} from './DiscordMessage';
+  GuildMember,
+} from './GuildMember';
+import {
+  IsEmail,
+} from 'class-validator';
 
 @Entity()
 /**
@@ -17,6 +20,10 @@ export class DiscordUser {
 
   @Column()
   avatarURL!: string;
+
+  @Column()
+  @IsEmail()
+  email!: string;
 
   @Column({
     type: 'timestamptz',
@@ -34,9 +41,6 @@ export class DiscordUser {
   @Column()
   tag!: string;
 
-  @OneToMany((type) => DiscordMessage, (message: DiscordMessage) => message.author)
-  messages!: DiscordMessage[];
-
   @CreateDateColumn({
     type: 'timestamptz',
   })
@@ -46,4 +50,7 @@ export class DiscordUser {
     type: 'timestamptz',
   })
   updatedAt!: Date;
+
+  @OneToMany((type) => GuildMember, (member:GuildMember) => member.user)
+  guildmembers!: GuildMember;
 }
