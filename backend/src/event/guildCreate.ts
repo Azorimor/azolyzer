@@ -15,6 +15,7 @@ export class DiscordGuildCreateEvent extends DiscordEvent {
    */
   constructor() {
     super('guildCreate');
+    logger.info('DiscordGuildCreateEvent created');
   }
 
   /**
@@ -22,7 +23,6 @@ export class DiscordGuildCreateEvent extends DiscordEvent {
    * @param {Guild} guild The issued message, which called this event.
    */
   public async execute(guild: Guild):Promise<void> {
-    logger.info('guildCreated triggered ');
     guild.members.fetch().then((member)=> {
       logger.info(member);
     }).catch((error) => {

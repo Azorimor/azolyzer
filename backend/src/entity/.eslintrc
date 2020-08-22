@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "new-cap":"off",
+    "no-unused-vars":"off"
+  }
+}

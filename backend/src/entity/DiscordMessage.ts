@@ -16,20 +16,11 @@ export class DiscordMessage {
   @PrimaryColumn()
   id!: string;
 
-  @ManyToOne((type) => GuildMember, (member: GuildMember) => member.messages)
+  @ManyToOne((type) => GuildMember) // , (member: GuildMember) => member.messages
   author!: GuildMember;
 
   @ManyToOne((type) => TextChannel, (channel: TextChannel) => channel.messages)
   channel!: TextChannel;
-
-  // Redundant information. Gets saved in Channel Entity for DMChannel, GuildChannel, ...
-  // @Column({
-  //   nullable: true,
-  // })
-  // guild!: string;
-
-  // @Column()
-  // member!: string;
 
   @Column({
     type: 'timestamptz',

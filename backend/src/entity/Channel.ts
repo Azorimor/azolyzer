@@ -3,8 +3,8 @@ import {
   ManyToOne, ManyToMany, JoinTable,
 } from 'typeorm';
 import {
-  Guild,
-} from './Guild';
+  DiscordGuild,
+} from './DiscordGuild';
 import {
   GuildMember,
 } from './GuildMember';
@@ -42,8 +42,8 @@ export abstract class Channel {
   })
   updatedAt!: Date;
 
-  @ManyToOne((type) => Guild, (guild: Guild) => guild.channels)
-  guild!: Guild;
+  @ManyToOne((type) => DiscordGuild, (guild: DiscordGuild) => guild.channels)
+  guild!: DiscordGuild;
 
   @ManyToMany((type) => GuildMember, (member: GuildMember) => member.channels)
   @JoinTable()

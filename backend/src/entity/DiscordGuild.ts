@@ -12,7 +12,7 @@ import {
 /**
  * Entity for Discord Guilds
  */
-export class Guild {
+export class DiscordGuild {
   @PrimaryColumn({
     type: 'bigint',
   })

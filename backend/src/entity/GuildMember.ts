@@ -8,8 +8,8 @@ import {
   VoiceStateUpdate,
 } from './VoiceStateUpdate';
 import {
-  Guild,
-} from './Guild';
+  DiscordGuild,
+} from './DiscordGuild';
 import {
   DiscordUser,
 } from './DiscordUser';
@@ -31,11 +31,11 @@ export class GuildMember {
   @PrimaryColumn({
     type: 'bigint',
   })
-  @ManyToOne((type) => Guild, (guild:Guild) => guild.members)
-  guild!: Guild;
+  @ManyToOne((type) => DiscordGuild, (guild:DiscordGuild) => guild.members)
+  guild!: DiscordGuild;
 
-  @OneToMany((type) => DiscordMessage, (message: DiscordMessage) => message.author)
-  messages!: DiscordMessage[];
+  // @OneToMany((type) => DiscordMessage, (message: DiscordMessage) => message.author)
+  // messages!: DiscordMessage[];
 
   @OneToMany((type) => VoiceStateUpdate, (voice: VoiceStateUpdate) => voice.user)
   voices!: VoiceStateUpdate[];
