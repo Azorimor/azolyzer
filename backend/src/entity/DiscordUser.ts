@@ -16,41 +16,42 @@ export class DiscordUser {
   @PrimaryColumn({
     type: 'bigint',
   })
-  id!: string;
+  id?: string;
 
   @Column()
-  avatarURL!: string;
+  avatarURL?: string;
 
   @Column()
   @IsEmail()
-  email!: string;
+  email?: string;
 
   @Column({
     type: 'timestamptz',
+    nullable: true,
   })
-  accountCreatedAt!: Date;
+  accountCreatedAt?: Date;
 
   @Column({
     nullable: true,
   })
-  locale!: string;
+  locale?: string;
 
   @Column()
-  username!: string;
+  username?: string;
 
   @Column()
-  tag!: string;
+  tag?: string;
 
   @CreateDateColumn({
     type: 'timestamptz',
   })
-  createdAt!: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn({
     type: 'timestamptz',
   })
-  updatedAt!: Date;
+  updatedAt?: Date;
 
   @OneToMany((type) => GuildMember, (member:GuildMember) => member.user)
-  guildmembers!: GuildMember;
+  guildmembers?: GuildMember;
 }

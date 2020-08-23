@@ -3,6 +3,9 @@ import express, {
 } from 'express';
 import cors from 'cors';
 import 'reflect-metadata';
+import {
+  authRouter,
+} from './auth/auth.router';
 
 /**
  * The main App file.
@@ -26,6 +29,7 @@ class App {
       this.app.use(cors());
 
       // Routing
+      this.app.use('/auth', authRouter.getRouter());
     }
 }
 

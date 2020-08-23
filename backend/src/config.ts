@@ -9,6 +9,11 @@ if (botPrefix == null) {
 
 export default {
   token: process.env.DISCORD_TOKEN,
+  client_id: process.env.DISCORD_CLIENT_ID,
+  client_secret: process.env.DISCORD_CLIENT_SECRET,
+  access_token_uri: process.env.DISCORD_ACCESS_TOKEN_URI,
+  authorization_uri: process.env.DISCORD_AUTHORIZATION_URI,
+  redirect_uri: process.env.DISCORD_REDIRECT_URI,
   port: process.env.PORT,
   prefix: botPrefix,
   activity_name: process.env.BOT_PRESENCE_ACTIVITY_NAME,
