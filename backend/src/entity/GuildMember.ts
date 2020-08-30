@@ -1,9 +1,6 @@
 import {
-  Entity, OneToMany, PrimaryColumn, ManyToOne, ManyToMany,
+  Entity, OneToMany, PrimaryColumn, ManyToOne, ManyToMany, Column, PrimaryGeneratedColumn, Unique,
 } from 'typeorm';
-import {
-  DiscordMessage,
-} from './DiscordMessage';
 import {
   VoiceStateUpdate,
 } from './VoiceStateUpdate';
@@ -18,28 +15,29 @@ import {
 } from './Channel';
 
 @Entity()
+@Unique(['user', 'guild'])
 /**
  * Entity for Discord Guild Member.
  */
 export class GuildMember {
-  @PrimaryColumn({
-    type: 'bigint',
-  })
-  @ManyToOne((type) => DiscordUser, (user:DiscordUser) => user.guildmembers)
-  user!: DiscordUser;
+  @PrimaryGeneratedColumn('uuid')
+  id?: string;
 
-  @PrimaryColumn({
-    type: 'bigint',
-  })
+  @ManyToOne((type) => DiscordUser, (user:DiscordUser) => user.guildmembers)
+  user?: DiscordUser;
+
   @ManyToOne((type) => DiscordGuild, (guild:DiscordGuild) => guild.members)
-  guild!: DiscordGuild;
+  guild?: DiscordGuild;
+
+  @Column()
+  displayName?: string;
 
   // @OneToMany((type) => DiscordMessage, (message: DiscordMessage) => message.author)
   // messages!: DiscordMessage[];
 
   @OneToMany((type) => VoiceStateUpdate, (voice: VoiceStateUpdate) => voice.user)
-  voices!: VoiceStateUpdate[];
+  voices?: VoiceStateUpdate[];
 
   @ManyToMany((type) => Channel, (channel: Channel) => channel.members)
-  channels!: Channel[]
+  channels?: Channel[]
 }

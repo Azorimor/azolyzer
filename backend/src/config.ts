@@ -9,6 +9,8 @@ if (botPrefix == null) {
 
 export default {
   token: process.env.DISCORD_TOKEN,
+  apiAccessTokenSecret: process.env.API_ACCESS_TOKEN_SECRET,
+  apiRefreshTokenSecret: process.env.API_REFRESH_TOKEN_SECRET,
   client_id: process.env.DISCORD_CLIENT_ID,
   client_secret: process.env.DISCORD_CLIENT_SECRET,
   access_token_uri: process.env.DISCORD_ACCESS_TOKEN_URI,

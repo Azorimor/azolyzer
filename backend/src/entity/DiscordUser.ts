@@ -5,8 +5,8 @@ import {
   GuildMember,
 } from './GuildMember';
 import {
-  IsEmail,
-} from 'class-validator';
+  DiscordGuild,
+} from './DiscordGuild';
 
 @Entity()
 /**
@@ -18,12 +18,11 @@ export class DiscordUser {
   })
   id?: string;
 
-  @Column()
-  avatarURL?: string;
-
-  @Column()
-  @IsEmail()
-  email?: string;
+  @Column({
+    nullable: true,
+    type: 'varchar',
+  })
+  avatar?: string | null;
 
   @Column({
     type: 'timestamptz',
@@ -54,4 +53,27 @@ export class DiscordUser {
 
   @OneToMany((type) => GuildMember, (member:GuildMember) => member.user)
   guildmembers?: GuildMember;
+
+  @Column({
+    default: 0,
+  })
+  refreshTokenVersion?: number;
+
+  @Column({
+    nullable: true,
+  })
+  discordAccessToken?: string;
+
+  @Column({
+    nullable: true,
+  })
+  discordRefreshToken?: string;
+
+  @Column({
+    default: false,
+  })
+  bot?: boolean;
+
+  @OneToMany((type) => DiscordGuild, (guild: DiscordGuild) => guild.owner)
+  ownedGuilds?: DiscordGuild[];
 }

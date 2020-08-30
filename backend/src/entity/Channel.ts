@@ -17,35 +17,35 @@ export abstract class Channel {
   @PrimaryColumn({
     type: 'bigint',
   })
-  id!: string;
+  id?: string;
 
   @Column()
-  name!: string;
+  name?: string;
 
   @Column({
     default: false,
   })
-  deleted!: boolean;
+  deleted?: boolean;
 
   @Column({
     type: 'timestamptz',
   })
-  channelCreatedAt!: Date;
+  channelCreatedAt?: Date;
 
   @CreateDateColumn({
     type: 'timestamptz',
   })
-  createdAt!: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn({
     type: 'timestamptz',
   })
-  updatedAt!: Date;
+  updatedAt?: Date;
 
   @ManyToOne((type) => DiscordGuild, (guild: DiscordGuild) => guild.channels)
-  guild!: DiscordGuild;
+  guild?: DiscordGuild;
 
   @ManyToMany((type) => GuildMember, (member: GuildMember) => member.channels)
   @JoinTable()
-  members!: GuildMember[]
+  members?: GuildMember[]
 }

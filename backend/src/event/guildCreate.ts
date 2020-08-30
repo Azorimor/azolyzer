@@ -5,6 +5,7 @@ import {
   Guild,
 } from 'discord.js';
 import logger from '../logger';
+import guildController from '../controller/guild.controller';
 
 /**
  * Handles discord event 'guildCreate'.
@@ -15,7 +16,7 @@ export class DiscordGuildCreateEvent extends DiscordEvent {
    */
   constructor() {
     super('guildCreate');
-    logger.info('DiscordGuildCreateEvent created');
+    logger.debug('DiscordGuildCreateEvent created');
   }
 
   /**
@@ -23,11 +24,8 @@ export class DiscordGuildCreateEvent extends DiscordEvent {
    * @param {Guild} guild The issued message, which called this event.
    */
   public async execute(guild: Guild):Promise<void> {
-    guild.members.fetch().then((member)=> {
-      logger.info(member);
-    }).catch((error) => {
-      logger.error(`Members of the guild ${guild.id}, could not be loaded. Error: ${error}`);
-    });
+    logger.info('guild created:-------------------'); // FIXME remove
+    guildController.saveGuild(guild);
   }
 }
 export default new DiscordGuildCreateEvent();
