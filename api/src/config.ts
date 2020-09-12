@@ -2,13 +2,7 @@ import dotenv = require('dotenv');
 
 dotenv.config();
 
-let botPrefix = process.env.BOT_PREFIX;
-if (botPrefix == null) {
-  botPrefix = '!';
-}
-
 export default {
-  token: process.env.DISCORD_TOKEN,
   apiAccessTokenSecret: process.env.API_ACCESS_TOKEN_SECRET,
   apiRefreshTokenSecret: process.env.API_REFRESH_TOKEN_SECRET,
   client_id: process.env.DISCORD_CLIENT_ID,
@@ -17,7 +11,6 @@ export default {
   authorization_uri: process.env.DISCORD_AUTHORIZATION_URI,
   redirect_uri: process.env.DISCORD_REDIRECT_URI,
   port: process.env.PORT,
-  prefix: botPrefix,
   activity_name: process.env.BOT_PRESENCE_ACTIVITY_NAME,
   activity_type: process.env.BOT_PRESENCE_ACTIVITY_TYPE,
   activity_URL: process.env.BOT_PRESENCE_ACTIVITY_URL,

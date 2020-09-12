@@ -5,7 +5,6 @@ import {
   Guild,
 } from 'discord.js';
 import logger from '../logger';
-import guildController from '../controller/guild.controller';
 
 /**
  * Handles discord event 'guildCreate'.
@@ -24,8 +23,8 @@ export class DiscordGuildCreateEvent extends DiscordEvent {
    * @param {Guild} guild The issued message, which called this event.
    */
   public async execute(guild: Guild):Promise<void> {
-    logger.info('guild created:-------------------'); // FIXME remove
-    guildController.saveGuild(guild);
+    // logger.info('guild created:-------------------'); // FIXME remove
+    // guildController.saveGuild(guild);
   }
 }
 export default new DiscordGuildCreateEvent();

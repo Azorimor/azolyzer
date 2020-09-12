@@ -10,6 +10,7 @@ import DiscordChannelCreateEvent from './event/channelCreate';
  */
 export class Bot {
     public client: Discord.Client;
+    public token: string = config.token!; // TODO message on empty token
     /**
      * Create a new App with the default configured express settings.
      */
@@ -37,8 +38,8 @@ export class Bot {
           message: `Logged in as ${this.client?.user?.tag}!`,
         });
       });
-      this.client.on('message', (message) => DiscordMessageEvent.execute(message));
-      this.client.on('guildCreate', (guild) => DiscordGuildCreateEvent.execute(guild));
-      this.client.on('channelCreate', (channel) => DiscordChannelCreateEvent.execute(channel));
+      // this.client.on('message', (message) => DiscordMessageEvent.execute(message));
+      // this.client.on('guildCreate', (guild) => DiscordGuildCreateEvent.execute(guild));
+      // this.client.on('channelCreate', (channel) => DiscordChannelCreateEvent.execute(channel));
     }
 }
