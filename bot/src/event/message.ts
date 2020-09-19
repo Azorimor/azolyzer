@@ -1,11 +1,11 @@
 import {
   DiscordEvent,
 } from './discordevent';
-import logger from '../logger';
+import logger from '../utils/logger';
 import {
   Message,
 } from 'discord.js';
-import config from '../config';
+import config from '../utils/config';
 
 /**
  * This Event is called, if a user writes a message. Discord: message

@@ -15,9 +15,11 @@
   "author": "Azorimor",
   "license": "GNU GPLv3",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.9.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "winston": "^3.3.3",
+    "winston-elasticsearch": "^0.10.0",
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {

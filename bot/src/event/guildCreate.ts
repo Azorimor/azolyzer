@@ -4,7 +4,7 @@ import {
 import {
   Guild,
 } from 'discord.js';
-import logger from '../logger';
+import logger from '../utils/logger';
 
 /**
  * Handles discord event 'guildCreate'.

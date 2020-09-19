@@ -7,8 +7,8 @@ import {
 import {
   verify,
 } from 'jsonwebtoken';
-import config from '../config';
-import logger from '../logger';
+import config from '../utils/config';
+import logger from '../utils/logger';
 import {
   DiscordUser,
 } from '../entity/DiscordUser';

@@ -1,12 +1,12 @@
 import DiscordOAuth2 from 'discord-oauth2';
-import config from '../config';
+import config from '../utils/config';
 import {
   DiscordUser,
 } from '../entity/DiscordUser';
 import {
   getRepository,
 } from 'typeorm';
-import logger from '../logger';
+import logger from '../utils/logger';
 import crypto from 'crypto';
 import {
   sign,

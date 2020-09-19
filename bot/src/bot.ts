@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
-import config from './config';
-import logger from './logger';
+import config from './utils/config';
+import logger from './utils/logger';
 import DiscordMessageEvent from './event/message';
 import DiscordGuildCreateEvent from './event/guildCreate';
 import DiscordChannelCreateEvent from './event/channelCreate';
@@ -33,10 +33,7 @@ export class Bot {
      */
     public config(): void {
       this.client.once('ready', ()=> {
-        logger.log({
-          level: 'info',
-          message: `Logged in as ${this.client?.user?.tag}!`,
-        });
+        logger.info(`Logged in as ${this.client?.user?.tag}.`);
       });
       // this.client.on('message', (message) => DiscordMessageEvent.execute(message));
       // this.client.on('guildCreate', (guild) => DiscordGuildCreateEvent.execute(guild));

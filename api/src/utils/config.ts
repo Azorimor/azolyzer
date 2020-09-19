@@ -5,6 +5,10 @@ dotenv.config();
 export default {
   apiAccessTokenSecret: process.env.API_ACCESS_TOKEN_SECRET,
   apiRefreshTokenSecret: process.env.API_REFRESH_TOKEN_SECRET,
+  elasticseachNodeURI: process.env.ELASTICSEARCH_NODE_URI,
+  elasticsearchUsername: process.env.ELASTICSEARCH_USERNAME,
+  elasticsearchPassword: process.env.ELASTICSEARCH_PASSWORD,
+
   client_id: process.env.DISCORD_CLIENT_ID,
   client_secret: process.env.DISCORD_CLIENT_SECRET,
   access_token_uri: process.env.DISCORD_ACCESS_TOKEN_URI,

@@ -7,7 +7,7 @@ import {
 import {
   GuildMember as DiscordGuildMember,
 } from '../entity/GuildMember';
-import logger from '../logger';
+import logger from '../utils/logger';
 import userController from './user.controller';
 import {
   DiscordGuild,

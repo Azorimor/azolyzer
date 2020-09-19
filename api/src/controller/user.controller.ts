@@ -7,7 +7,7 @@ import {
 import {
   DiscordUser,
 } from '../entity/DiscordUser';
-import logger from '../logger';
+import logger from '../utils/logger';
 
 /**
  * Controller for handling user related database functionality.

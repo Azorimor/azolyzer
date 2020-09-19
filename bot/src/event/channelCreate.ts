@@ -4,7 +4,7 @@ import {
 import {
   Channel,
 } from 'discord.js';
-import logger from '../logger';
+import logger from '../utils/logger';
 import {
   TextChannel as DiscordTextChannel,
 } from 'discord.js';
