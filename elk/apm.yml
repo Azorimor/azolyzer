@@ -1,0 +1,22 @@
+---
+## Default Kibana configuration from Kibana base image.
+## https://github.com/elastic/kibana/blob/master/src/dev/build/tasks/os_packages/docker_generator/templates/kibana_yml.template.js
+#
+apm-server.name: apm
+apm-server.host: 0.0.0.0:8200
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+
+
+## X-Pack security credentials
+#
+elasticsearch.username: elastic
+elasticsearch.password: securePassword
+
+
+kibana.enabled: true
+kibana.username: elastic
+kibana.password: securePassword
+
+output.elasticsearch.hosts: [ "elasticsearch:9200" ]
+output.elasticsearch.username: elastic
+output.elasticsearch.password: securePassword
