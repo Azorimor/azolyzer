@@ -8,8 +8,8 @@ import {
   GuildMember,
 } from './GuildMember';
 import {
-  DiscordUser,
-} from './DiscordUser';
+  WebUser,
+} from './WebUser';
 
 @Entity()
 /**
@@ -60,8 +60,8 @@ export class DiscordGuild {
   @Column()
   name?: string;
 
-  @ManyToOne((type) => DiscordUser, (member: DiscordUser) => member.ownedGuilds)
-  owner?: DiscordUser;
+  @ManyToOne((type) => WebUser, (user: WebUser) => user.ownedGuilds)
+  owner?: WebUser;
 
   @Column({
     default: false,

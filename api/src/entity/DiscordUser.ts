@@ -1,45 +1,29 @@
 import {
-  Entity, Column, OneToMany, PrimaryColumn, CreateDateColumn, UpdateDateColumn,
+  Entity, Column, OneToMany, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn,
 } from 'typeorm';
 import {
   GuildMember,
 } from './GuildMember';
-import {
-  DiscordGuild,
-} from './DiscordGuild';
 
 @Entity()
 /**
  * Entity for an Discord User.
  */
 export class DiscordUser {
-  @PrimaryColumn({
-    type: 'bigint',
-  })
+  @PrimaryGeneratedColumn('uuid')
   id?: string;
 
   @Column({
-    nullable: true,
-    type: 'varchar',
+    type: 'bigint',
+    unique: true,
   })
-  avatar?: string | null;
+  discordSecretId?: string;
 
   @Column({
     type: 'timestamptz',
     nullable: true,
   })
   accountCreatedAt?: Date;
-
-  @Column({
-    nullable: true,
-  })
-  locale?: string;
-
-  @Column()
-  username?: string;
-
-  @Column()
-  tag?: string;
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -55,25 +39,7 @@ export class DiscordUser {
   guildmembers?: GuildMember;
 
   @Column({
-    default: 0,
-  })
-  refreshTokenVersion?: number;
-
-  @Column({
-    nullable: true,
-  })
-  discordAccessToken?: string;
-
-  @Column({
-    nullable: true,
-  })
-  discordRefreshToken?: string;
-
-  @Column({
     default: false,
   })
   bot?: boolean;
-
-  @OneToMany((type) => DiscordGuild, (guild: DiscordGuild) => guild.owner)
-  ownedGuilds?: DiscordGuild[];
 }
