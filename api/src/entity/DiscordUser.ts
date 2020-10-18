@@ -13,11 +13,8 @@ export class DiscordUser {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
-  @Column({
-    type: 'bigint',
-    unique: true,
-  })
-  discordSecretId?: string;
+  @Column()
+  anonymDiscordID?: string;
 
   @Column({
     type: 'timestamptz',

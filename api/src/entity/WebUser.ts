@@ -1,13 +1,10 @@
 import {
   Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn,
-  OneToMany, OneToOne, JoinColumn,
+  OneToMany, ManyToMany,
 } from 'typeorm';
 import {
   DiscordGuild,
 } from './DiscordGuild';
-import {
-  DiscordUser,
-} from './DiscordUser';
 
 @Entity()
 /**
@@ -63,7 +60,7 @@ export class WebUser {
   @OneToMany((type) => DiscordGuild, (guild: DiscordGuild) => guild.owner)
   ownedGuilds?: DiscordGuild[];
 
-  @OneToOne((type) => DiscordUser)
-  @JoinColumn()
-  discordUser?: DiscordUser;
+  // guilds, where the user is a member
+  @ManyToMany((type) => DiscordGuild)
+  partGuilds?: DiscordGuild[]
 }
